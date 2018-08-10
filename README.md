@@ -1,4 +1,5 @@
-## Repository Created with code to reproduce the issue when using
+## Repository Created with code to reproduce the issue.
+The Tech Stack includes,
 * Spring Cloud Config Server
 * Spring Boot
 * Spring Caching abstraction/annotations with Redis Cache Server
