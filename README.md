@@ -7,7 +7,7 @@
 * The expiration values are provided in yaml format and 
 * externalied in a git based config repo   and served via Spring Cloud Config Server.
 
-# When using @RefreshScope the CacheManager bean is not getting refreshed.
+### When using @RefreshScope the CacheManager bean is not getting refreshed.
 
 Also, not sure if the updated expiration would be applicable for existing keys as well
 as new keys added in the future via this Cache Manager.
