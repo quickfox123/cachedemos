@@ -1,0 +1,65 @@
+package com.demo.main.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import com.demo.main.domain.User;
+import com.demo.main.repository.UserRepository;
+
+@Service
+public class UserServiceImpl implements UserService {
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
+
+	private final UserRepository userRepository;
+
+	@Autowired
+	public UserServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		LOG.info("Fetching All Users");
+		return userRepository.findAll();
+	}
+
+	@Override
+	@Cacheable(value = "users", key = "#id")
+	public User getUserById(long id) {
+		LOG.info("Getting user with ID {}.", id);
+		return userRepository.findOne(id);
+	}
+	
+	@Override
+	@Cacheable(value = "members", key = "#id")
+	public User getMemberById(long id) {
+		LOG.info("Getting Member with ID {}.", id);
+		return userRepository.findOne(id);
+	}
+	
+	@Override
+	@Cacheable(value = "plans", key = "#id")
+	public User getPlanById(long id) {
+		LOG.info("Getting Plan  with ID {}.", id);
+		return userRepository.findOne(id);
+	}
+
+	@Override
+	public User updateUserById(long id, User user) {
+		LOG.info("Updating user with ID {}.", id);
+		userRepository.save(user);
+		return user;
+	}
+
+	@Override
+	public void deleteUserById(long id) {
+		LOG.info("deleting person with id {}", id);
+		userRepository.delete(id);
+	}
+
+}

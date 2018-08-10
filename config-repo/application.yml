@@ -1,0 +1,18 @@
+#Disable Management Security to access actuator management endpoints in DEV
+management:
+  security:
+    enabled: false
+ 
+#Spring Caching and Redis Server Configuration    
+spring:
+  cache:
+    type: redis  #The Type of Caching Provider ( Provide value as 'none' to disable caching )
+  redis:
+    host: 127.0.0.1
+    port: 6380
+
+
+endpoints:
+  restart:
+    enabled: true
+
