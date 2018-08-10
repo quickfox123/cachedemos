@@ -5,7 +5,7 @@ The Tech Stack includes,
 * Spring Caching abstraction/annotations with Redis Cache Server
 
 ### Repository Consists of 3 components
-* config-server to Server the configuration to the cache-service
+* config-server to Serve the configuration to the cache-service
 * config-repo to store the configuration for the service and
 * cache-service - demo service which uses Spring Caching annotations with Redis Cache Server
 
