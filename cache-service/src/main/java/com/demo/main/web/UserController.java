@@ -21,9 +21,9 @@ public class UserController {
 
 	private final UserService userService;
 	
-
+/*
 	@Autowired
-	User user;
+	User user;*/
 	
 	@Autowired
 	public UserController(UserService userService) {
@@ -48,10 +48,10 @@ public class UserController {
 		return userService.getPlanById(id);
 	}
 	
-	@GetMapping("/name")
+	/*@GetMapping("/name")
 	public String getMyName() {
 		LOG.info("Getting Name");
 		return user.getName();
-	}
+	}*/
 
 }

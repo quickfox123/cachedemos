@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Cacheable(value = "users", key = "#id")
+	@Cacheable(value = "users", key = "#id +''")
 	public User getUserById(long id) {
 		LOG.info("Getting user with ID {}.", id);
 		return userRepository.findOne(id);

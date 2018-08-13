@@ -40,10 +40,16 @@ public class CacheDemoApplication implements CommandLineRunner {
 		User raj = new User("Raj", 2000);
 		User sheldon = new User("Sheldon", 29000);
 		User penny = new User("Penny", 550);
+		User mary = new User("mary", 550);
+		User barrow = new User("barrow", 550);
+		User nancy = new User("nancy", 550);
 
 		userRepository.save(raj);
 		userRepository.save(sheldon);
 		userRepository.save(penny);
+		userRepository.save(mary);
+		userRepository.save(barrow);
+		userRepository.save(nancy);
 	}
 	
 	
