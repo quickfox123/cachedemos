@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -15,6 +16,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisSentinelConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -22,17 +25,42 @@ import org.springframework.data.redis.core.RedisTemplate;
 @ConditionalOnProperty(value = "spring.cache.type", havingValue = "redis")
 @EnableCaching
 @RefreshScope
-public class RedisCacheConfig /* implements CachingConfigurer */ {
+public class RedisCacheConfig {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
+	
+	@Value("${redisSentinelMaster}")
+	String redisSentinelMaster;
+	
+	@Value("${redisSentinelHost1}")
+	String redisSentinelHost1;
+	
+	
+	@Value("${redisSentinelPort1}")
+	Integer redisSentinelPort1;
+	
+	@Value("${redisSentinelHost2}")
+	String redisSentinelHost2;
+	
+	@Value("${redisSentinelPort2}")
+	Integer redisSentinelPort2;
+	
+	@Value("${redisSentinelHost3}")
+	String redisSentinelHost3;
+	
+	@Value("${redisSentinelPort3}")
+	Integer redisSentinelPort3;
+
 
 	@Bean
 	@RefreshScope
-	JedisConnectionFactory jedisConnectionFactory() {
-		JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
-		jedisConFactory.setHostName("127.0.0.1");
-		jedisConFactory.setPort(6380);
-		return jedisConFactory;
+	public RedisConnectionFactory jedisConnectionFactory() {
+		RedisSentinelConfiguration SENTINEL_CONFIG = new RedisSentinelConfiguration().master(redisSentinelMaster)
+				.sentinel(redisSentinelHost1, redisSentinelPort1)
+				.sentinel(redisSentinelHost2, redisSentinelPort2)
+				.sentinel(redisSentinelHost3, redisSentinelPort3);
+		return new JedisConnectionFactory(SENTINEL_CONFIG);
 	}
+	
 
 	@Bean
 	@RefreshScope

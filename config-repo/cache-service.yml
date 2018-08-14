@@ -15,6 +15,6 @@ app:
     expiry-seconds: 85   
     
 
-logging:
-  level:
-    org.springframework.data.redis: DEBUG
+#logging:
+  #level:
+    #org.springframework.data.redis: DEBUG
