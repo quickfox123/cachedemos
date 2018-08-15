@@ -19,8 +19,8 @@ The Tech Stack includes,
   also externalized in a git based config repo and served via Spring Cloud Config Server.
 
 ## Dependencies
-   The Components depend on the **caching-component** library as available in repo, [Caching-Component](https://github.com/gsamartian/caching-component)
-  First, download the repo and build and install the caching-component jar in your local maven repository.
+  * The Components depend on the **caching-component** library as available in repo, [Caching-Component](https://github.com/gsamartian/caching-component)
+  * First, download the repo and build and install the caching-component jar in your local maven repository.
    
 ## Getting Started
 * Clone the Repository into your local machine
