@@ -1,0 +1,14 @@
+#Application Specific Cache Configuration
+#Provide the name for the cache, its expiry/TTL as seconds
+app:
+  defaultCacheExpiryTime: 10
+  cache-config:
+  - name: members                 
+    expiry-time: "0 0/5 * * * ?"            
+  - name: users
+    #expiry-seconds: 500
+    expiry-time: "0 18 12 * * ?"
+  - name: plans
+    #expiry-seconds: 85
+    expiry-time: "0 0/2 * * * ?"   
+    

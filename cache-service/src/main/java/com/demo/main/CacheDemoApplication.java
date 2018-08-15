@@ -6,16 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
+import com.demo.main.domain.Member;
+import com.demo.main.domain.Plan;
 import com.demo.main.domain.User;
+import com.demo.main.repository.MemberRepository;
+import com.demo.main.repository.PlanRepository;
 import com.demo.main.repository.UserRepository;
 
 @SpringBootApplication
-@EnableCaching
-@EnableScheduling
 @RefreshScope
 public class CacheDemoApplication implements CommandLineRunner {
 
@@ -23,11 +25,15 @@ public class CacheDemoApplication implements CommandLineRunner {
 
 	private final UserRepository userRepository;
 
-
+	private final PlanRepository planRepository;
+	
+	private final MemberRepository memberRepository;
 
 	@Autowired
-	public CacheDemoApplication(UserRepository userRepository) {
+	public CacheDemoApplication(UserRepository userRepository,PlanRepository planRepository,MemberRepository memberRepository) {
 		this.userRepository = userRepository;
+		this.planRepository=planRepository;
+		this.memberRepository=memberRepository;
 	}
 
 	public static void main(String[] args) {
@@ -44,13 +50,36 @@ public class CacheDemoApplication implements CommandLineRunner {
 		User barrow = new User("barrow", 550);
 		User nancy = new User("nancy", 550);
 
+		userRepository.deleteAll();
 		userRepository.save(raj);
 		userRepository.save(sheldon);
 		userRepository.save(penny);
 		userRepository.save(mary);
 		userRepository.save(barrow);
 		userRepository.save(nancy);
+		
+		Plan seniorPlan=new Plan("senior","Plan for Seniors");
+		Plan juniorPlan=new Plan("junior","Plan for Juniors");
+		Plan groupPlan=new Plan("group","Plan for Groups");
+		
+		planRepository.deleteAll();
+		planRepository.save(seniorPlan);
+		planRepository.save(juniorPlan);
+		planRepository.save(groupPlan);
+		
+		
+		Member rajMember=new Member("Raj","GOLD");
+		Member gopalMember=new Member("Gopal","SILVER");
+		
+		memberRepository.deleteAllInBatch();
+		memberRepository.save(rajMember);
+		memberRepository.save(gopalMember);
 	}
-	
+	@Bean
+    public ThreadPoolTaskScheduler taskScheduler(){
+        ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
+        taskScheduler.setPoolSize(20);
+        return  taskScheduler;
+    }
 	
 }

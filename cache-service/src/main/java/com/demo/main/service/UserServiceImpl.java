@@ -35,19 +35,9 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findOne(id);
 	}
 	
-	@Override
-	@Cacheable(value = "members", key = "#id")
-	public User getMemberById(long id) {
-		LOG.info("Getting Member with ID {}.", id);
-		return userRepository.findOne(id);
-	}
 	
-	@Override
-	@Cacheable(value = "plans", key = "#id")
-	public User getPlanById(long id) {
-		LOG.info("Getting Plan  with ID {}.", id);
-		return userRepository.findOne(id);
-	}
+	
+	
 
 	@Override
 	public User updateUserById(long id, User user) {
@@ -58,8 +48,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUserById(long id) {
-		LOG.info("deleting person with id {}", id);
+		LOG.info("Deleting User with id {}", id);
 		userRepository.delete(id);
+	}
+
+	@Override
+	public User createUser(User user) {
+		LOG.info("Creating User with  {}", user);
+		return userRepository.save(user);
 	}
 
 }

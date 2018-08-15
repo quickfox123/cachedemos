@@ -1,20 +1,3 @@
 #Port the service listens for requests
 server:
   port: 8090
-
-#Application Specific Cache Configuration
-#Provide the name for the cache, its expiry/TTL as seconds
-app:
-  defaultCacheExpiryTime: 10
-  cache-config:
-  - name: members                 
-    expiry-seconds: 60            
-  - name: users
-    expiry-seconds: 70
-  - name: plans
-    expiry-seconds: 85   
-    
-
-#logging:
-  #level:
-    #org.springframework.data.redis: DEBUG

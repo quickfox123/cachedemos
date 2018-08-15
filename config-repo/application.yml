@@ -7,21 +7,14 @@ management:
 spring:
   cache:
     type: redis  #The Type of Caching Provider ( Provide value as 'none' to disable caching )
+  redis:
+    sentinel:
+      master: redis-cluster
+      nodes: 127.0.0.1:16380,127.0.0.1:16381,127.0.0.1:16382
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
 
-redisSentinelMaster: redis-cluster    
-redisSentinelHost1: 127.0.0.1
-redisSentinelPort1: 16380
-redisSentinelHost2: 127.0.0.1
-redisSentinelPort2: 16381
-redisSentinelHost3: 127.0.0.1
-redisSentinelPort3: 16382
-
-
-
-
-
-    
-endpoints:
-  restart:
-    enabled: true
-
+refresh:
+  endpoint: http://localhost:8090/refresh

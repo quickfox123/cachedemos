@@ -12,10 +12,12 @@ public interface UserService {
 	User updateUserById(long id, User user);
 
 	void deleteUserById(long id);
+	
+	User createUser(User user);
 
 	List<User> getAllUsers();
 
-	User getMemberById(long id);
+	
 
-	User getPlanById(long id);
+	
 }
