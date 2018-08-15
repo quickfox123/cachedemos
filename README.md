@@ -36,7 +36,7 @@ The Tech Stack includes,
   mvn spring-boot:run
   ```
 * Next , Start the Redis Server , if not already started
-* Now, navigate to **cache-service** folder path and start the **cache-service" as below,
+* Now, navigate to **cache-service** folder path and start the **cache-service** as below,
 	```
    mvn spring-boot:run
    ```
