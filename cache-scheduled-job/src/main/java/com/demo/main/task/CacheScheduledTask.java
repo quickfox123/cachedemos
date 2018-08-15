@@ -53,7 +53,7 @@ public class CacheScheduledTask  {
 			cacheExpiryTimeMap.forEach((k, v) -> {
 				LOG.debug("Added Cron Task for cache: {} with CRON: {}", k, v);
 				CronTrigger cronTrigger = new CronTrigger(v);
-				LOG.info("***Adding CacheClearTask for Cache:{} with CronExpression:{}",k,cronTrigger.getExpression());
+				LOG.debug("***Adding CacheClearTask for Cache:{} with CronExpression:{}",k,cronTrigger.getExpression());
 				taskScheduler.schedule(new CacheClearTask(cacheManager, k),cronTrigger);
 			});
 		}

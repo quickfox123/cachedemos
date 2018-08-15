@@ -19,13 +19,14 @@ The Tech Stack includes,
   also externalized in a git based config repo and served via Spring Cloud Config Server.
 
 ## Dependencies
-   The Components depend on the **caching-component** library as available in repo, [Caching-Component](https://github.com/gsamartian/caching-component)
-   
+*  The Components depend on the **caching-component** library as available in repo, [Caching-Component](https://github.com/gsamartian/caching-component)
+*  First, download the repo and build and install the caching-component jar in your local maven repository.
+
    
 ## Getting Started
 * Clone the Repository into your local machine
 * First, Start the Spring Cloud Config Server as below,
- * Navigate to the folder of **config-server**
+* Navigate to the folder of **config-server**
   Run the command ,
   ```
   mvn spring-boot:run -Dspring.cloud.config.server.native.search-locations=<<folder for config-repo>>
@@ -36,7 +37,8 @@ The Tech Stack includes,
   mvn spring-boot:run
   ```
 * Next , Start the Redis Server , if not already started
-* Now, navigate to **cache-service** folder path and start the **cache-service" as below,
+* Then , navigate to **cache-service** folder path and start the **cache-service" as below,
+* After that, navigate to **cache-service** folder path and start the **cache-service** as below,
 	```
    mvn spring-boot:run
    ```
