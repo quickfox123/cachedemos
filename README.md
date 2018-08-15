@@ -1,19 +1,47 @@
-## Repository Created with code to reproduce the issue.
+## Demo Repository for Expiring Caches based on absolute Expiration Time
 The Tech Stack includes,
 * Spring Cloud Config Server
 * Spring Boot
-* Spring Caching abstraction/annotations with Redis Cache Server
+* Spring Caching abstraction/annotations
+* Redis Server
 
-### Repository Consists of 3 components
-* config-server to Serve the configuration to the cache-service
-* config-repo to store the configuration for the service and
-* cache-service - demo service which uses Spring Caching annotations with Redis Cache Server
 
-### Requirement is the refresh/update the expiration values of different caches used in the application at runtime without recycling the application.
+### Repository Consists of the following components
+* config-server         - Service which serves the configuration for the cache-service and cache-scheduled-job
+* config-repo           - Stores the configuration for cache-service and cache-scheduled-job
+* cache-service         - Service which uses Spring Caching annotations to cache method responses 
+* cache-scheduled-job   - Schedules and Expires the caches based on the expiration time configured
+
+### Requirement
+* Refresh/Update the expiration values of different caches
+  used in the application at runtime without recycling the application.
 * The expiration values are provided in yaml format and 
-* externalied in a git based config repo   and served via Spring Cloud Config Server.
+  also externalized in a git based config repo and served via Spring Cloud Config Server.
 
-### When using @RefreshScope the CacheManager bean is not getting refreshed.
+## Dependencies
+   The Components depend on the **caching-component** library as available in repo, [Caching-Component](https://github.com/gsamartian/caching-component)
+   
+   
+## Getting Started
+* Clone the Repository into your local machine
+* First, Start the Spring Cloud Config Server as below,
+ * Navigate to the folder of **config-server**
+  Run the command ,
+  ```
+  mvn spring-boot:run -Dspring.cloud.config.server.native.search-locations=<<folder for config-repo>>
+  ```
+  (OR) Just update **config-server/src/main/resources/application.yml** with the location of the config-repo folder
+  and just run
+  ```
+  mvn spring-boot:run
+  ```
+* Next , Start the Redis Server , if not already started
+* Now, navigate to **cache-service** folder path and start the **cache-service" as below,
+	```
+   mvn spring-boot:run
+   ```
+* Finally, start the **cache-scheduled-job** by navigating to the folder and running the below command,
+```
+ mvn spring-boot:run
+ ```
 
-Also, not sure if the updated expiration would be applicable for existing keys as well
-as new keys added in the future via this Cache Manager.
