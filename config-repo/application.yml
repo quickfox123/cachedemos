@@ -17,4 +17,4 @@ spring:
       - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
 
 refresh:
-  endpoint: http://localhost:8090/refresh
+  endpoint: http://localhost:9030/refresh,http://localhost:9030/refresh

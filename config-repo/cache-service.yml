@@ -1,3 +1,17 @@
 #Port the service listens for requests
 server:
-  port: 8090
+  port: 9030
+
+app:
+  defaultCacheExpiryTime: 10
+  cache-config:
+    - name: members                 
+      #expiry-time: "0 0/5 * * * ?"            
+      expiry-seconds: 200
+    - name: users
+      expiry-seconds: 45
+      #expiry-time: "0 18 12 * * ?"
+    - name: plans
+      expiry-seconds: 85
+      #expiry-time: "0 0/2 * * * ?"   
+      

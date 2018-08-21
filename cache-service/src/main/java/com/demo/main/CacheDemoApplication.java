@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import com.demo.main.domain.Member;
 import com.demo.main.domain.Plan;
@@ -19,7 +18,10 @@ import com.demo.main.repository.UserRepository;
 
 @SpringBootApplication
 @RefreshScope
+@EnableCaching
 public class CacheDemoApplication implements CommandLineRunner {
+	
+	
 
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
@@ -43,12 +45,12 @@ public class CacheDemoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... strings) {
 		LOG.info("Saving users. Current user count is {}.", userRepository.count());
-		User raj = new User("Raj", 2000);
-		User sheldon = new User("Sheldon", 29000);
-		User penny = new User("Penny", 550);
-		User mary = new User("mary", 550);
-		User barrow = new User("barrow", 550);
-		User nancy = new User("nancy", 550);
+		User raj = new User("Raj", 5000);
+		User sheldon = new User("Sheldon", 5000);
+		User penny = new User("Penny", 0);
+		User mary = new User("mary", 250);
+		User barrow = new User("barrow", 250);
+		User nancy = new User("nancy", 0);
 
 		userRepository.deleteAll();
 		userRepository.save(raj);
@@ -75,11 +77,5 @@ public class CacheDemoApplication implements CommandLineRunner {
 		memberRepository.save(rajMember);
 		memberRepository.save(gopalMember);
 	}
-	@Bean
-    public ThreadPoolTaskScheduler taskScheduler(){
-        ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
-        taskScheduler.setPoolSize(20);
-        return  taskScheduler;
-    }
 	
 }

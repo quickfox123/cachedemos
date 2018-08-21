@@ -7,7 +7,9 @@ import com.demo.main.domain.User;
 public interface UserService {
 
 
-	User getUserById(long id);
+	/*User getUserById(long id);*/
+	
+	User getUserByIdAndDivision(String id,String division);
 
 	User updateUserById(long id, User user);
 

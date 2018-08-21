@@ -28,12 +28,12 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findAll();
 	}
 
-	@Override
-	@Cacheable(value = "users", key = "#id +''")
+	/*@Override
+	@Cacheable(value = "users", key = "#id")
 	public User getUserById(long id) {
 		LOG.info("Getting user with ID {}.", id);
 		return userRepository.findOne(id);
-	}
+	}*/
 	
 	
 	
@@ -56,6 +56,20 @@ public class UserServiceImpl implements UserService {
 	public User createUser(User user) {
 		LOG.info("Creating User with  {}", user);
 		return userRepository.save(user);
+	}
+
+	@Cacheable(value = "users",key="#id + #mbu")
+	public User getUserByIdAndDivision(String id, String division) {
+		LOG.info("Getting user By Id:{} and division:{}.", id,division);
+		User user=userRepository.findOne(Long.valueOf(id));
+		if(null!=division && division.equalsIgnoreCase("ALL")) {
+			user.setFollowers(5000);
+		}else if(null!=division && division.equalsIgnoreCase("SALES")) {
+			user.setFollowers(0);
+		}else {
+			user.setFollowers(250);
+		}
+		return user;
 	}
 
 }
