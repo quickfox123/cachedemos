@@ -47,3 +47,17 @@ The Tech Stack includes,
  mvn spring-boot:run
  ```
 
+## Testing the Service Endpoints
+* Refreshing the Expiration Times/TTL of Configured Caches in Config Repo
+  http://localhost:9030/cache/expiration/refresh
+
+* Reading Value of User
+  http://localhost:9030/users/13?mbu=OTHER
+
+* Deleting Cache Keys for Cache 'users'
+  http://localhost:9030/cache/users/12?division=SALEs
+
+
+
+
+ 
